@@ -1,6 +1,8 @@
+#Import libraries/modules
 import pygame
 from AI.pong_ai import AiPlayer
 
+#Initialize pygame
 pygame.init()
 
 #Define constants
@@ -26,6 +28,7 @@ raquet_2_points = 0
 ball = pygame.Rect(WIDTH//2 - 5, HEIGHT//2 - 5, BALL_DIMENSION, BALL_DIMENSION)
 y_vel = x_vel = RAQUET_VEL
 
+#Draw functions
 def draw_ball():
     pygame.draw.rect(WIN, BALL_COLOR, ball)
 
@@ -36,6 +39,7 @@ def draw_raquets():
 def draw_net():
     pygame.draw.rect(WIN, RAQUET_COLOR, NET)
 
+#Handles ball movement and points 
 def ball_movement():
     global x_vel
     global y_vel
@@ -58,18 +62,21 @@ def ball_movement():
     ball.x += x_vel
     ball.y += y_vel
 
+#Draws the winner text
 def draw_winner(text):
     game_over = SCORE_FONT.render(text, 1, RAQUET_COLOR)
     WIN.blit(game_over, (WIDTH//2 - game_over.get_width()//2, HEIGHT//2 - game_over.get_height()//2))
     pygame.display.update()
     pygame.time.delay(5000)
 
+#Draws the score
 def draw_score():
     raquet1_score = SCORE_FONT.render(str(raquet_1_points), 1, RAQUET_COLOR)
     raquet2_score = SCORE_FONT.render(str(raquet_2_points), 1, RAQUET_COLOR)
     WIN.blit(raquet1_score, (WIDTH//2 - raquet1_score.get_width() - 10, 10))
     WIN.blit(raquet2_score, (WIDTH//2 + 10, 10))
 
+#Draws everithing and updates the window
 def draw_window():
     WIN.fill(BACKGROUND_COLOR)
     draw_raquets()
@@ -79,12 +86,15 @@ def draw_window():
     ball_movement()
     pygame.display.update()
 
+#Main function
 def main():
     global RAQUET_VEL
     run = True
     clock = pygame.time.Clock()
     while run:
-        clock.tick(FPS)
+        clock.tick(FPS) #Handle fps
+
+        #Braks the loop if the user presses the exit button
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -121,6 +131,7 @@ def main():
             AiPlayer.move_raquet_intelligent(raquet_1, ball, HEIGHT, RAQUET_HEIGHT)
             AiPlayer.move_raquet_intelligent(raquet_2, ball, HEIGHT, RAQUET_HEIGHT)
 
+        #Checks if someone won and sets the winner text to its right value
         winner_text = ''
         if raquet_1_points == 5:
             winner_text = 'Player 1 wins'
@@ -129,10 +140,13 @@ def main():
         if winner_text != '':
             draw_winner(winner_text)
             break
-
-        draw_window()
         
+        #Call draw window every loop
+        draw_window()
+
+    #Quit pygame    
     pygame.quit()
 
+#Run main function
 if __name__ == '__main__':
     main()
