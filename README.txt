@@ -1,4 +1,4 @@
-This is a pong game made with python. It uses pygame as main library for the interface. 
+This is a pong game made with python. It uses pygame as main library. 
 It has an integrated AI that play the game against you or against an other AI, 
 you can also play 1vs1 in the same device.
 
