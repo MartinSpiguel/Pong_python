@@ -1,14 +1,10 @@
 
 class AiPlayer():
-    #MOVES RAQUET UP AND DOWN (naive AI)
-    def move_raquet(RAQUET_1, RAQUET_VEL):
-        RAQUET_1.y += RAQUET_VEL
-
-    #MAKES THE RAQUET FOLLOW THE BALL
-    def move_raquet_intelligent(RAQUET, BALL, HEIGHT, RAQUET_HEIGHT):
-        if BALL.y >= HEIGHT - RAQUET_HEIGHT:
-            RAQUET.y = HEIGHT - RAQUET_HEIGHT
+    #MAKES THE raquet FOLLOW THE ball
+    def move_raquet_intelligent(raquet, ball, height, raquet_height):
+        if ball.y >= height - raquet_height:
+            raquet.y = height - raquet_height
         else:
-            y_ball = BALL.y
-            RAQUET.y = y_ball
+            y_ball = ball.y
+            raquet.y = y_ball
         
